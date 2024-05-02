@@ -1,12 +1,12 @@
 const Footer = () => (
-  <footer className="flex items-center justify-center w-full h-24 border-t">
+  <footer className="flex items-center justify-center w-full h-24 border-t text-amber-500 hover:underline">
     <a
       className="flex items-center justify-center"
-      href="https://devskills.co?utm_source=challenge-boilerplate"
+      href="https://www.linkedin.com/in/niharika6625/"
       target="_blank"
       rel="noopener noreferrer"
     >
-      Built by DevSkills
+      Code test - submitted by NiharikaGupta
     </a>
   </footer>
 )
