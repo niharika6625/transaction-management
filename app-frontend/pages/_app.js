@@ -5,3 +5,6 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+
+//Q: How is this file and index.js connected? this file is not being used anywhere 
+//Q: tailwind import ?

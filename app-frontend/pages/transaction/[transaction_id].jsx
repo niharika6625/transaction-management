@@ -64,3 +64,11 @@ const TransactionDetails = () => {
 };
 
 export default TransactionDetails;
+
+//Q: explain useEffect part
+
+//Q: Next.js offers several advantages over plain React.js, including support for server-side rendering (SSR) 
+    //and static site generation (SSG), file-based routing, API routes, automatic code splitting, 
+    //built-in CSS and Sass support, and image optimization. 
+    //SSR renders pages dynamically on each request, while SSG pre-renders pages at build time, 
+    //resulting in faster page loads and better SEO.

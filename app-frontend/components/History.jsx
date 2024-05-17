@@ -6,18 +6,22 @@ import fetchData from '../services/api';
 const { TRANSACTION, ACCOUNT } = API_PATH;
 
 const History = ({ reload }) => {
-  const router = useRouter();
+  const router = useRouter(); //hook from next.js provides routing functionalities
   const [transactions, setTransactions] = useState([]);
   const [account, setAccount] = useState({});
+
+  //The useEffect hook triggers the handleDataLoad function whenever the reload prop changes. 
+  //This function fetches transaction data from the server and updates the transactions state variable, 
+  //ensuring that the component re-renders with the latest data.
 
   useEffect(() => {
     handleDataLoad()
   }, [reload])
 
-  const handleDataLoad = () => {
+  const handleDataLoad = () => { 
     fetchData(`/api${TRANSACTION}`).then((res) => {
-      if (res.data && res.data.length) {
-        getAccountDetails(res.data[0].account_id)
+      if (res.data && res.data.length) {//checks that the response data is not empty
+        getAccountDetails(res.data[0].account_id) //passing the account id of the first transaction in the list
       }
       setTransactions(res.data);
     }).catch((error) => {
@@ -25,7 +29,7 @@ const History = ({ reload }) => {
     })
   }
 
-  const getAccountDetails = (accountId) => {
+  const getAccountDetails = (accountId) => { //fetch account details based on the account id
     fetchData(`/api${ACCOUNT}/${accountId}`).then((res) => {
       setAccount(res.data);
     }).catch((error) => {
@@ -80,3 +84,15 @@ const History = ({ reload }) => {
 };
 
 export default History;
+
+//reload
+//display of transaction table
+//routing to transaction detail
+//
+
+//improvement-> pagination to avoid lot of transactions on one page
+
+//Q: why did you decide to use useRouter hook ? use page based routing within the application
+//Q: res.data && res.data.length -> difference?
+//Q: handleDataRelod()
+//Q: ln : 43-50

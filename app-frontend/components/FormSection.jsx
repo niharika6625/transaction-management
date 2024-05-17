@@ -16,22 +16,21 @@ const validationSchema = Yup.object({
 const FormSection = ({ handleReload }) => {
 
   const [error, setError] = useState('');
+
   const formik = useFormik({
     initialValues: {
       account_id: '',
       amount: '',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values) => { //async ensures that the UI remains responsive when the form is submitting
       fetchData(`/api${TRANSACTION}`, 'POST', { ...values, amount: Number(values.amount) }).then((res) => {
         formik.resetForm();
         setError('');
-        setSubmitting(false);
         handleReload();
       }).catch((error) => {
         console.error('Error fetching data:', error);
         setError('Account ID entered is invalid');
-        setSubmitting(false);
       })
     },
   });
@@ -78,3 +77,23 @@ const FormSection = ({ handleReload }) => {
 };
 
 export default FormSection;
+
+//form validation and formSubmission
+//displays error messages
+//invokes a function that tells the parent to reload the component to show the transaction table
+//API calling for sending the new valid data to database file and returns response to client hence updating the UI
+
+//The form submission process interacts with the server-side API by sending a POST request to a specific 
+//endpoint (/api${TRANSACTION}) with the form data. The server-side API processes the request, validates the data, 
+//performs any necessary operations (e.g., saving the transaction to a database), and returns a response to the client. 
+//The client then handles the response, updating the UI accordingly.
+
+
+
+
+
+//Q: What are the potential drawbacks of using inline form validation messages directly in the JSX?
+    //Inline form validation messages directly in the JSX can clutter the code and make it harder to maintain,
+    //especially if there are multiple form fields with different validation rules. 
+    //It can also make the JSX less readable and increase the complexity of the component. 
+    //Additionally, inline validation messages may not provide a consistent user experience across the application.
